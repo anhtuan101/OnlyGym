@@ -99,7 +99,7 @@
             this.thôngTinChuyênMônToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1896, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1896, 33);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -227,7 +227,7 @@
             this.btnDanhSachKH.Name = "btnDanhSachKH";
             this.btnDanhSachKH.Size = new System.Drawing.Size(208, 48);
             this.btnDanhSachKH.TabIndex = 8;
-            this.btnDanhSachKH.Text = "Danh Sach Khac Hang";
+            this.btnDanhSachKH.Text = "Danh Sách Khách Hàng";
             this.btnDanhSachKH.UseVisualStyleBackColor = true;
             this.btnDanhSachKH.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -241,7 +241,7 @@
             this.btnThongTinKH.TabIndex = 7;
             this.btnThongTinKH.Text = "Thông Tin Khách Hàng";
             this.btnThongTinKH.UseVisualStyleBackColor = true;
-            this.btnThongTinKH.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnThongTinKH.Click += new System.EventHandler(this.btnThongTinKH_Click);
             // 
             // btnCheckin
             // 
@@ -307,7 +307,7 @@
         private System.Windows.Forms.Label lblChucVu;
         private System.Windows.Forms.Label lblAccName;
         private System.Windows.Forms.Button btnCheckin;
-        private System.Windows.Forms.Button btnThongTinKH;
+        public System.Windows.Forms.Button btnThongTinKH;
         private System.Windows.Forms.Button btnDanhSachKH;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem thôngTinGóiTậpToolStripMenuItem;

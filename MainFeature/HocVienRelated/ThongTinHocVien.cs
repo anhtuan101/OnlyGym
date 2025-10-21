@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -66,6 +67,44 @@ namespace GymManagerment_MVP
         private void lvThongTinPT_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public string query = "server = TUNN\\ANHTUAN; database = gymManagement;Integrated Security=True";
+        public void DisplayThoTinHocVien(string code)
+        {
+            using (SqlConnection con = new SqlConnection(query))
+            using (SqlCommand cmd = new SqlCommand("sp_GetThongTinHocVien", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@code", code);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    tbPFTen.Text = row["TenHV"].ToString();
+                    tbPFSDT.Text = row["sdt"].ToString();
+                    cbPFTrangThai.Text = row["TrangThai"].ToString();
+                    cbPFGHT.Text = row["TenGoiTap"].ToString();
+
+                    if (row["ngaySinh"] != DBNull.Value)
+                        dtpNgaysinh.Value = Convert.ToDateTime(row["ngaySinh"]);
+
+                    rdNam.Checked = row["GioiTinh"].ToString() == "Nam";
+                    rdNu.Checked = row["GioiTinh"].ToString() == "Nữ";
+                    txtGhiChu.Text = row["ghiChu"].ToString();
+
+                    if (row["thoiGianTao"] != DBNull.Value)
+                        dtpTao.Value = Convert.ToDateTime(row["thoiGianTao"]);
+                    if (row["thoiGianSua"] != DBNull.Value)
+                        dtpNgaySua.Value = Convert.ToDateTime(row["thoiGianSua"]);
+                    if (row["ngayXoa"] != DBNull.Value)
+                        dtpXoa.Value = Convert.ToDateTime(row["ngayXoa"]);
+                }
+            }
         }
 
         private void ThongTinHocVien_Load(object sender, EventArgs e)

@@ -20,6 +20,7 @@ namespace GymManagerment_MVP
         {
             InitializeComponent();
             this.MinimumSize = new Size(1280, 800);
+            loadUserControl(new MuaHang());
             // Test Form
         }
 
@@ -72,9 +73,14 @@ namespace GymManagerment_MVP
             loadUserControl(new ThongKeDoanhThuUC());
         }
 
-        private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
+        public void MoMuaHang()
         {
             loadUserControl(new MuaHang());
+        }
+
+        public void btnQuanLyNhanVien_Click(object sender, EventArgs e)
+        {
+            MoMuaHang();
         }
 
         private void btnXuatHoaDon_Click(object sender, EventArgs e)
@@ -108,10 +114,9 @@ namespace GymManagerment_MVP
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            loadUserControl(new ThongTinHocVien());
-        }
+        
+
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -142,6 +147,28 @@ namespace GymManagerment_MVP
         private void button2_Click_1(object sender, EventArgs e)
         {
             loadUserControl(new ThongTinHopDongPTUC());
+        }
+
+        public void btnThongTinKH_Click(object sender, EventArgs e)
+        {
+            OpenHocVienUC();
+        }
+
+        public void OpenHocVienUC(string code = null)
+        {
+            // Giả sử bạn đã có một panel để chứa user control, ví dụ: pnlMain
+            pnlContent.Controls.Clear();
+
+            // Khởi tạo hoặc tái sử dụng UserControl thông tin học viên
+            var thongTinUC = new ThongTinHocVien(); // hoặc dùng tên thật của UC thông tin học viên
+            pnlContent.Controls.Add(thongTinUC);
+            thongTinUC.Dock = DockStyle.Fill;
+
+            // Gọi hàm hiển thị chi tiết học viên
+            if (!string.IsNullOrEmpty(code))
+            {
+                thongTinUC.DisplayThoTinHocVien(code);
+            }
         }
     }
 }

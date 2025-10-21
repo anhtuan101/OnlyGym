@@ -39,6 +39,7 @@
             this.chgCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chGTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chgSDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nTao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nXoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,15 +51,15 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblTuoi = new System.Windows.Forms.Label();
             this.lblKyHieu = new System.Windows.Forms.Label();
-            this.lblSex = new System.Windows.Forms.Label();
+            this.lblGioiTinh = new System.Windows.Forms.Label();
             this.btnGiaHan = new System.Windows.Forms.Button();
             this.btnPFDangKyPT = new System.Windows.Forms.Button();
             this.btnChiTiet = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblPFGoiHT = new System.Windows.Forms.Label();
-            this.lblPFTrangThai = new System.Windows.Forms.Label();
-            this.lblPFSDT = new System.Windows.Forms.Label();
-            this.lblPFTen = new System.Windows.Forms.Label();
+            this.lblGoiTap = new System.Windows.Forms.Label();
+            this.lblTThai = new System.Windows.Forms.Label();
+            this.lblSDT = new System.Windows.Forms.Label();
+            this.lblTen = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnThem = new System.Windows.Forms.Button();
             this.pnlLoc = new System.Windows.Forms.Panel();
@@ -72,11 +73,12 @@
             this.cbDKPT = new System.Windows.Forms.CheckBox();
             this.btnXoa = new System.Windows.Forms.Button();
             this.lblGoiHienCo = new System.Windows.Forms.Label();
-            this.cbBlackList = new System.Windows.Forms.CheckBox();
-            this.cbVip = new System.Windows.Forms.CheckBox();
+            this.cbNu = new System.Windows.Forms.CheckBox();
+            this.cbNam = new System.Windows.Forms.CheckBox();
             this.chEND = new System.Windows.Forms.CheckBox();
             this.cbH = new System.Windows.Forms.CheckBox();
             this.gbLastCheck = new System.Windows.Forms.GroupBox();
+            this.cbCheck = new System.Windows.Forms.CheckBox();
             this.dtpDenCheckin = new System.Windows.Forms.DateTimePicker();
             this.btnLoc = new System.Windows.Forms.Button();
             this.lblDen = new System.Windows.Forms.Label();
@@ -86,7 +88,6 @@
             this.lblTrangThai = new System.Windows.Forms.Label();
             this.pnlNav = new System.Windows.Forms.Panel();
             this.btnDanhSach = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
             this.pnlDanhSach.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHocVien)).BeginInit();
@@ -115,7 +116,6 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel3.Controls.Add(this.btnReset);
             this.panel3.Controls.Add(this.btnTim);
             this.panel3.Controls.Add(this.cbFindB);
             this.panel3.Controls.Add(this.txtTimHV);
@@ -146,7 +146,7 @@
             "Code",
             "Tên",
             "SDT"});
-            this.cbFindB.Location = new System.Drawing.Point(32, 37);
+            this.cbFindB.Location = new System.Drawing.Point(93, 38);
             this.cbFindB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbFindB.Name = "cbFindB";
             this.cbFindB.Size = new System.Drawing.Size(180, 28);
@@ -154,7 +154,7 @@
             // 
             // txtTimHV
             // 
-            this.txtTimHV.Location = new System.Drawing.Point(244, 37);
+            this.txtTimHV.Location = new System.Drawing.Point(305, 38);
             this.txtTimHV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTimHV.Name = "txtTimHV";
             this.txtTimHV.Size = new System.Drawing.Size(534, 26);
@@ -169,6 +169,7 @@
             this.chgCode,
             this.chGTen,
             this.chgSDT,
+            this.cNgaySinh,
             this.tag,
             this.nTao,
             this.nXoa,
@@ -180,8 +181,10 @@
             this.dgvHocVien.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvHocVien.Name = "dgvHocVien";
             this.dgvHocVien.RowHeadersWidth = 62;
+            this.dgvHocVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHocVien.Size = new System.Drawing.Size(1158, 792);
             this.dgvHocVien.TabIndex = 0;
+            this.dgvHocVien.SelectionChanged += new System.EventHandler(this.dgvHocVien_SelectionChanged);
             // 
             // chgCode
             // 
@@ -208,10 +211,18 @@
             this.chgSDT.Name = "chgSDT";
             this.chgSDT.Width = 150;
             // 
+            // cNgaySinh
+            // 
+            this.cNgaySinh.DataPropertyName = "ngaySinh";
+            this.cNgaySinh.HeaderText = "Ngày Sinh";
+            this.cNgaySinh.MinimumWidth = 8;
+            this.cNgaySinh.Name = "cNgaySinh";
+            this.cNgaySinh.Width = 150;
+            // 
             // tag
             // 
-            this.tag.DataPropertyName = "tag";
-            this.tag.HeaderText = "Thẻ";
+            this.tag.DataPropertyName = "gioiTinh";
+            this.tag.HeaderText = "Giới tính";
             this.tag.MinimumWidth = 8;
             this.tag.Name = "tag";
             this.tag.Width = 150;
@@ -281,15 +292,15 @@
             this.panel4.BackColor = System.Drawing.Color.Azure;
             this.panel4.Controls.Add(this.lblTuoi);
             this.panel4.Controls.Add(this.lblKyHieu);
-            this.panel4.Controls.Add(this.lblSex);
+            this.panel4.Controls.Add(this.lblGioiTinh);
             this.panel4.Controls.Add(this.btnGiaHan);
             this.panel4.Controls.Add(this.btnPFDangKyPT);
             this.panel4.Controls.Add(this.btnChiTiet);
             this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Controls.Add(this.lblPFGoiHT);
-            this.panel4.Controls.Add(this.lblPFTrangThai);
-            this.panel4.Controls.Add(this.lblPFSDT);
-            this.panel4.Controls.Add(this.lblPFTen);
+            this.panel4.Controls.Add(this.lblGoiTap);
+            this.panel4.Controls.Add(this.lblTThai);
+            this.panel4.Controls.Add(this.lblSDT);
+            this.panel4.Controls.Add(this.lblTen);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(28, 172);
             this.panel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -317,15 +328,15 @@
             this.lblKyHieu.TabIndex = 30;
             this.lblKyHieu.Text = "|";
             // 
-            // lblSex
+            // lblGioiTinh
             // 
-            this.lblSex.AutoSize = true;
-            this.lblSex.Location = new System.Drawing.Point(204, 75);
-            this.lblSex.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSex.Name = "lblSex";
-            this.lblSex.Size = new System.Drawing.Size(42, 20);
-            this.lblSex.TabIndex = 29;
-            this.lblSex.Text = "Nam";
+            this.lblGioiTinh.AutoSize = true;
+            this.lblGioiTinh.Location = new System.Drawing.Point(204, 75);
+            this.lblGioiTinh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGioiTinh.Name = "lblGioiTinh";
+            this.lblGioiTinh.Size = new System.Drawing.Size(42, 20);
+            this.lblGioiTinh.TabIndex = 29;
+            this.lblGioiTinh.Text = "Nam";
             // 
             // btnGiaHan
             // 
@@ -356,6 +367,7 @@
             this.btnChiTiet.TabIndex = 26;
             this.btnChiTiet.Text = "Chi tiết";
             this.btnChiTiet.UseVisualStyleBackColor = true;
+            this.btnChiTiet.Click += new System.EventHandler(this.btnChiTiet_Click);
             // 
             // pictureBox1
             // 
@@ -369,45 +381,45 @@
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
             // 
-            // lblPFGoiHT
+            // lblGoiTap
             // 
-            this.lblPFGoiHT.AutoSize = true;
-            this.lblPFGoiHT.Location = new System.Drawing.Point(204, 194);
-            this.lblPFGoiHT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPFGoiHT.Name = "lblPFGoiHT";
-            this.lblPFGoiHT.Size = new System.Drawing.Size(100, 20);
-            this.lblPFGoiHT.TabIndex = 13;
-            this.lblPFGoiHT.Text = "Gói : 1 tháng";
+            this.lblGoiTap.AutoSize = true;
+            this.lblGoiTap.Location = new System.Drawing.Point(204, 194);
+            this.lblGoiTap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGoiTap.Name = "lblGoiTap";
+            this.lblGoiTap.Size = new System.Drawing.Size(100, 20);
+            this.lblGoiTap.TabIndex = 13;
+            this.lblGoiTap.Text = "Gói : 1 tháng";
             // 
-            // lblPFTrangThai
+            // lblTThai
             // 
-            this.lblPFTrangThai.AutoSize = true;
-            this.lblPFTrangThai.Location = new System.Drawing.Point(204, 214);
-            this.lblPFTrangThai.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPFTrangThai.Name = "lblPFTrangThai";
-            this.lblPFTrangThai.Size = new System.Drawing.Size(69, 20);
-            this.lblPFTrangThai.TabIndex = 12;
-            this.lblPFTrangThai.Text = "Còn hạn";
+            this.lblTThai.AutoSize = true;
+            this.lblTThai.Location = new System.Drawing.Point(204, 214);
+            this.lblTThai.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTThai.Name = "lblTThai";
+            this.lblTThai.Size = new System.Drawing.Size(69, 20);
+            this.lblTThai.TabIndex = 12;
+            this.lblTThai.Text = "Còn hạn";
             // 
-            // lblPFSDT
+            // lblSDT
             // 
-            this.lblPFSDT.AutoSize = true;
-            this.lblPFSDT.Location = new System.Drawing.Point(204, 174);
-            this.lblPFSDT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPFSDT.Name = "lblPFSDT";
-            this.lblPFSDT.Size = new System.Drawing.Size(130, 20);
-            this.lblPFSDT.TabIndex = 11;
-            this.lblPFSDT.Text = "SDT: 012345678";
+            this.lblSDT.AutoSize = true;
+            this.lblSDT.Location = new System.Drawing.Point(204, 174);
+            this.lblSDT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSDT.Name = "lblSDT";
+            this.lblSDT.Size = new System.Drawing.Size(130, 20);
+            this.lblSDT.TabIndex = 11;
+            this.lblSDT.Text = "SDT: 012345678";
             // 
-            // lblPFTen
+            // lblTen
             // 
-            this.lblPFTen.AutoSize = true;
-            this.lblPFTen.Location = new System.Drawing.Point(204, 35);
-            this.lblPFTen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPFTen.Name = "lblPFTen";
-            this.lblPFTen.Size = new System.Drawing.Size(137, 20);
-            this.lblPFTen.TabIndex = 10;
-            this.lblPFTen.Text = "Nguyễn Đình Hiếu";
+            this.lblTen.AutoSize = true;
+            this.lblTen.Location = new System.Drawing.Point(204, 35);
+            this.lblTen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTen.Name = "lblTen";
+            this.lblTen.Size = new System.Drawing.Size(137, 20);
+            this.lblTen.TabIndex = 10;
+            this.lblTen.Text = "Nguyễn Đình Hiếu";
             // 
             // panel1
             // 
@@ -444,8 +456,8 @@
             this.pnlLoc.Controls.Add(this.cbDKPT);
             this.pnlLoc.Controls.Add(this.btnXoa);
             this.pnlLoc.Controls.Add(this.lblGoiHienCo);
-            this.pnlLoc.Controls.Add(this.cbBlackList);
-            this.pnlLoc.Controls.Add(this.cbVip);
+            this.pnlLoc.Controls.Add(this.cbNu);
+            this.pnlLoc.Controls.Add(this.cbNam);
             this.pnlLoc.Controls.Add(this.chEND);
             this.pnlLoc.Controls.Add(this.cbH);
             this.pnlLoc.Controls.Add(this.gbLastCheck);
@@ -557,6 +569,7 @@
             this.btnXoa.TabIndex = 26;
             this.btnXoa.Text = "Xóa tất cả";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // lblGoiHienCo
             // 
@@ -568,27 +581,27 @@
             this.lblGoiHienCo.TabIndex = 24;
             this.lblGoiHienCo.Text = "Gói Hiện Có";
             // 
-            // cbBlackList
+            // cbNu
             // 
-            this.cbBlackList.AutoSize = true;
-            this.cbBlackList.Location = new System.Drawing.Point(34, 245);
-            this.cbBlackList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbBlackList.Name = "cbBlackList";
-            this.cbBlackList.Size = new System.Drawing.Size(103, 24);
-            this.cbBlackList.TabIndex = 31;
-            this.cbBlackList.Text = "Black List";
-            this.cbBlackList.UseVisualStyleBackColor = true;
+            this.cbNu.AutoSize = true;
+            this.cbNu.Location = new System.Drawing.Point(34, 245);
+            this.cbNu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbNu.Name = "cbNu";
+            this.cbNu.Size = new System.Drawing.Size(55, 24);
+            this.cbNu.TabIndex = 31;
+            this.cbNu.Text = "Nữ";
+            this.cbNu.UseVisualStyleBackColor = true;
             // 
-            // cbVip
+            // cbNam
             // 
-            this.cbVip.AutoSize = true;
-            this.cbVip.Location = new System.Drawing.Point(34, 208);
-            this.cbVip.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbVip.Name = "cbVip";
-            this.cbVip.Size = new System.Drawing.Size(61, 24);
-            this.cbVip.TabIndex = 30;
-            this.cbVip.Text = "VIP";
-            this.cbVip.UseVisualStyleBackColor = true;
+            this.cbNam.AutoSize = true;
+            this.cbNam.Location = new System.Drawing.Point(34, 208);
+            this.cbNam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbNam.Name = "cbNam";
+            this.cbNam.Size = new System.Drawing.Size(68, 24);
+            this.cbNam.TabIndex = 30;
+            this.cbNam.Text = "Nam";
+            this.cbNam.UseVisualStyleBackColor = true;
             // 
             // chEND
             // 
@@ -614,6 +627,7 @@
             // 
             // gbLastCheck
             // 
+            this.gbLastCheck.Controls.Add(this.cbCheck);
             this.gbLastCheck.Controls.Add(this.dtpDenCheckin);
             this.gbLastCheck.Controls.Add(this.btnLoc);
             this.gbLastCheck.Controls.Add(this.lblDen);
@@ -626,13 +640,24 @@
             this.gbLastCheck.Size = new System.Drawing.Size(196, 202);
             this.gbLastCheck.TabIndex = 25;
             this.gbLastCheck.TabStop = false;
-            this.gbLastCheck.Text = "Last Checkin";
+            this.gbLastCheck.Text = "Ngày Sinh";
+            // 
+            // cbCheck
+            // 
+            this.cbCheck.AutoSize = true;
+            this.cbCheck.Location = new System.Drawing.Point(19, 45);
+            this.cbCheck.Name = "cbCheck";
+            this.cbCheck.Size = new System.Drawing.Size(80, 24);
+            this.cbCheck.TabIndex = 4;
+            this.cbCheck.Text = "Check";
+            this.cbCheck.UseVisualStyleBackColor = true;
             // 
             // dtpDenCheckin
             // 
-            this.dtpDenCheckin.CustomFormat = "dd/MM/yyyy";
+            this.dtpDenCheckin.Checked = false;
+            this.dtpDenCheckin.CustomFormat = "MM/dd/yyyy";
             this.dtpDenCheckin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDenCheckin.Location = new System.Drawing.Point(9, 138);
+            this.dtpDenCheckin.Location = new System.Drawing.Point(19, 156);
             this.dtpDenCheckin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpDenCheckin.Name = "dtpDenCheckin";
             this.dtpDenCheckin.Size = new System.Drawing.Size(156, 26);
@@ -651,7 +676,7 @@
             // lblDen
             // 
             this.lblDen.AutoSize = true;
-            this.lblDen.Location = new System.Drawing.Point(4, 114);
+            this.lblDen.Location = new System.Drawing.Point(14, 132);
             this.lblDen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDen.Name = "lblDen";
             this.lblDen.Size = new System.Drawing.Size(39, 20);
@@ -661,7 +686,7 @@
             // lblTu
             // 
             this.lblTu.AutoSize = true;
-            this.lblTu.Location = new System.Drawing.Point(4, 54);
+            this.lblTu.Location = new System.Drawing.Point(14, 72);
             this.lblTu.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTu.Name = "lblTu";
             this.lblTu.Size = new System.Drawing.Size(27, 20);
@@ -670,9 +695,10 @@
             // 
             // dtpTuCheckin
             // 
-            this.dtpTuCheckin.CustomFormat = "dd/MM/yyyy";
+            this.dtpTuCheckin.Checked = false;
+            this.dtpTuCheckin.CustomFormat = "MM/dd/yyyy";
             this.dtpTuCheckin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTuCheckin.Location = new System.Drawing.Point(9, 78);
+            this.dtpTuCheckin.Location = new System.Drawing.Point(19, 96);
             this.dtpTuCheckin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpTuCheckin.Name = "dtpTuCheckin";
             this.dtpTuCheckin.Size = new System.Drawing.Size(156, 26);
@@ -684,9 +710,9 @@
             this.lblThe.Location = new System.Drawing.Point(30, 174);
             this.lblThe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblThe.Name = "lblThe";
-            this.lblThe.Size = new System.Drawing.Size(36, 20);
+            this.lblThe.Size = new System.Drawing.Size(71, 20);
             this.lblThe.TabIndex = 22;
-            this.lblThe.Text = "Thẻ";
+            this.lblThe.Text = "Giới Tính";
             // 
             // lblTrangThai
             // 
@@ -718,17 +744,6 @@
             this.btnDanhSach.TabIndex = 0;
             this.btnDanhSach.Text = "Danh Sách Học Viên";
             this.btnDanhSach.UseVisualStyleBackColor = true;
-            // 
-            // btnReset
-            // 
-            this.btnReset.Location = new System.Drawing.Point(896, 34);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(112, 35);
-            this.btnReset.TabIndex = 2;
-            this.btnReset.Text = "Mặc định";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // DanhSachHocVienUC_v2
             // 
@@ -768,10 +783,10 @@
         private System.Windows.Forms.DataGridView dgvHocVien;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblPFGoiHT;
-        private System.Windows.Forms.Label lblPFTrangThai;
-        private System.Windows.Forms.Label lblPFSDT;
-        private System.Windows.Forms.Label lblPFTen;
+        private System.Windows.Forms.Label lblGoiTap;
+        private System.Windows.Forms.Label lblTThai;
+        private System.Windows.Forms.Label lblSDT;
+        private System.Windows.Forms.Label lblTen;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Panel pnlLoc;
@@ -790,7 +805,7 @@
         private System.Windows.Forms.Button btnChiTiet;
         private System.Windows.Forms.Label lblTuoi;
         private System.Windows.Forms.Label lblKyHieu;
-        private System.Windows.Forms.Label lblSex;
+        private System.Windows.Forms.Label lblGioiTinh;
         private System.Windows.Forms.Button btnGiaHan;
         private System.Windows.Forms.Button btnPFDangKyPT;
         private System.Windows.Forms.CheckBox cbH;
@@ -801,8 +816,8 @@
         private System.Windows.Forms.CheckBox cb6Thang;
         private System.Windows.Forms.CheckBox cb3Thang;
         private System.Windows.Forms.CheckBox cb1thang;
-        private System.Windows.Forms.CheckBox cbBlackList;
-        private System.Windows.Forms.CheckBox cbVip;
+        private System.Windows.Forms.CheckBox cbNu;
+        private System.Windows.Forms.CheckBox cbNam;
         private System.Windows.Forms.Label lbldpt;
         private System.Windows.Forms.Panel pnlNav;
         private System.Windows.Forms.Button btnDanhSach;
@@ -811,11 +826,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chgCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn chGTen;
         private System.Windows.Forms.DataGridViewTextBoxColumn chgSDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cNgaySinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn tag;
         private System.Windows.Forms.DataGridViewTextBoxColumn nTao;
         private System.Windows.Forms.DataGridViewTextBoxColumn nXoa;
         private System.Windows.Forms.DataGridViewTextBoxColumn tthai;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenGT;
-        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.CheckBox cbCheck;
     }
 }
