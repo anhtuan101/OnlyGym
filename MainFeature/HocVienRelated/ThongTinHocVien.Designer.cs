@@ -126,6 +126,7 @@
             this.btnRestore.TabIndex = 51;
             this.btnRestore.Text = "Restore";
             this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // btnXoa
             // 
@@ -139,7 +140,7 @@
             // 
             // dtpXoa
             // 
-            this.dtpXoa.CustomFormat = "dd/MM/yyyy-hh:mm";
+            this.dtpXoa.CustomFormat = "MM/dd/yyyy";
             this.dtpXoa.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpXoa.Location = new System.Drawing.Point(806, 240);
             this.dtpXoa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -159,7 +160,7 @@
             // 
             // dtpNgaySua
             // 
-            this.dtpNgaySua.CustomFormat = "dd/MM/yyyy-hh:mm";
+            this.dtpNgaySua.CustomFormat = "MM/dd/yyyy";
             this.dtpNgaySua.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNgaySua.Location = new System.Drawing.Point(806, 197);
             this.dtpNgaySua.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -179,7 +180,7 @@
             // 
             // dtpTao
             // 
-            this.dtpTao.CustomFormat = "dd/MM/yyyy-hh:mm";
+            this.dtpTao.CustomFormat = "MM/dd/yyyy";
             this.dtpTao.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTao.Location = new System.Drawing.Point(806, 149);
             this.dtpTao.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -263,6 +264,7 @@
             this.btnSua.TabIndex = 38;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // lblGhiChu
             // 
@@ -372,6 +374,9 @@
             // cbPFTrangThai
             // 
             this.cbPFTrangThai.FormattingEnabled = true;
+            this.cbPFTrangThai.Items.AddRange(new object[] {
+            "Hoạt động",
+            "Ngừng hoạt động"});
             this.cbPFTrangThai.Location = new System.Drawing.Point(400, 109);
             this.cbPFTrangThai.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbPFTrangThai.Name = "cbPFTrangThai";
@@ -430,7 +435,7 @@
             this.pbAvartar.Location = new System.Drawing.Point(18, 25);
             this.pbAvartar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbAvartar.Name = "pbAvartar";
-            this.pbAvartar.Padding = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.pbAvartar.Padding = new System.Windows.Forms.Padding(15);
             this.pbAvartar.Size = new System.Drawing.Size(249, 329);
             this.pbAvartar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAvartar.TabIndex = 18;
@@ -484,7 +489,7 @@
             this.tabHóaĐơn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabHóaĐơn.Name = "tabHóaĐơn";
             this.tabHóaĐơn.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabHóaĐơn.Size = new System.Drawing.Size(1710, 519);
+            this.tabHóaĐơn.Size = new System.Drawing.Size(1710, 520);
             this.tabHóaĐơn.TabIndex = 1;
             this.tabHóaĐơn.Text = "Thông Tin Hóa Đơn";
             this.tabHóaĐơn.UseVisualStyleBackColor = true;
@@ -495,7 +500,7 @@
             this.tabGoi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabGoi.Name = "tabGoi";
             this.tabGoi.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabGoi.Size = new System.Drawing.Size(1710, 519);
+            this.tabGoi.Size = new System.Drawing.Size(1710, 520);
             this.tabGoi.TabIndex = 2;
             this.tabGoi.Text = "Lịch Sử Gói";
             this.tabGoi.UseVisualStyleBackColor = true;
@@ -506,7 +511,7 @@
             this.tabLichSuPT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabLichSuPT.Name = "tabLichSuPT";
             this.tabLichSuPT.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabLichSuPT.Size = new System.Drawing.Size(1710, 519);
+            this.tabLichSuPT.Size = new System.Drawing.Size(1710, 520);
             this.tabLichSuPT.TabIndex = 3;
             this.tabLichSuPT.Text = "Thông Tin PT";
             this.tabLichSuPT.UseVisualStyleBackColor = true;

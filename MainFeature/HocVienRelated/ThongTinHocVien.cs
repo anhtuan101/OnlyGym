@@ -1,4 +1,5 @@
-﻿using GymManagerment_MVP.MainFeature.HocVienRelated;
+﻿using GymManagerment_MVP.Business;
+using GymManagerment_MVP.MainFeature.HocVienRelated;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -69,7 +70,37 @@ namespace GymManagerment_MVP
 
         }
 
+
         public string query = "server = TUNN\\ANHTUAN; database = gymManagement;Integrated Security=True";
+
+        private void LoadGoiTap()
+        {
+            string cmd = "SELECT ID, tenGoi FROM GoiTap";
+            using (SqlConnection con = new SqlConnection(query))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbPFGHT.DataSource = dt;
+                cbPFGHT.DisplayMember = "tenGoi";
+                cbPFGHT.ValueMember = "ID";
+            }
+        }
+
+        private void LoadTag()
+        {
+            string cmd = "select tag from HocVien";
+            using (SqlConnection con = new SqlConnection(query))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbPFThe.DataSource = dt;
+                cbPFThe.DisplayMember = "tag";
+            }
+        }
         public void DisplayThoTinHocVien(string code)
         {
             using (SqlConnection con = new SqlConnection(query))
@@ -87,7 +118,8 @@ namespace GymManagerment_MVP
                     DataRow row = dt.Rows[0];
                     tbPFTen.Text = row["TenHV"].ToString();
                     tbPFSDT.Text = row["sdt"].ToString();
-                    cbPFTrangThai.Text = row["TrangThai"].ToString();
+                    string tthai = row["TrangThai"].ToString();
+                    cbPFTrangThai.Text = tthai == "1" ? "Hoạt động" : "Ngừng hoạt động";
                     cbPFGHT.Text = row["TenGoiTap"].ToString();
 
                     if (row["ngaySinh"] != DBNull.Value)
@@ -105,6 +137,7 @@ namespace GymManagerment_MVP
                         dtpXoa.Value = Convert.ToDateTime(row["ngayXoa"]);
                 }
             }
+            btnSua.Enabled = true;
         }
 
         private void ThongTinHocVien_Load(object sender, EventArgs e)
@@ -130,6 +163,66 @@ namespace GymManagerment_MVP
             thongTinHoaDonUC.Dock = DockStyle.Fill;
             tabHóaĐơn.Controls.Add(thongTinHoaDonUC);
             thongTinHoaDonUC.BringToFront();
+            btnSua.Enabled = false;
+            LoadGoiTap();
+            LoadTag();
+        }
+    
+        public void Update_HVien()
+        {
+            int gioiTinh = rdNam.Checked ? 1 : 0;
+            int trangthai = (cbPFTrangThai.Text == "Hoạt động") ? 1 : 0;
+            using (SqlConnection con = new SqlConnection(query))
+            using (SqlCommand cmd = new SqlCommand("Update_HV", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tenHV", tbPFTen.Text);
+                cmd.Parameters.AddWithValue("@SDT", tbPFSDT.Text);
+                cmd.Parameters.Add("@ngaysinh", SqlDbType.SmallDateTime).Value = dtpNgaysinh.Value;
+                cmd.Parameters.AddWithValue("@gioitinh", gioiTinh);
+                cmd.Parameters.Add("@tgianTao", SqlDbType.SmallDateTime).Value = dtpTao.Value;
+                cmd.Parameters.Add("@tgianSua", SqlDbType.SmallDateTime).Value = dtpNgaySua.Value;
+                cmd.Parameters.Add("@tgianXoa", SqlDbType.SmallDateTime).Value = dtpXoa.Value;
+                cmd.Parameters.AddWithValue("@tthai", trangthai);
+                cmd.Parameters.AddWithValue("@tenGoi", cbPFGHT.Text);
+                cmd.Parameters.AddWithValue("@ghichu", txtGhiChu.Text);
+                con.Open();
+                int tb = cmd.ExecuteNonQuery();
+                if (tb > 0)
+                {
+                    MessageBox.Show("Cập nhật thông tin học viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thông tin học viên thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                con.Close();
+                con.Dispose();
+            }
+        }
+
+        public void reset()
+        {
+            tbPFTen.Text = "";
+            tbPFSDT.Text = "";
+            dtpNgaysinh.Value = DateTime.Now;
+            rdNam.Checked = true;
+            cbPFTrangThai.SelectedIndex = -1;
+            cbPFGHT.SelectedIndex = -1;
+            txtGhiChu.Text = "";
+            dtpTao.Value = DateTime.Now;
+            dtpNgaySua.Value = DateTime.Now;
+            dtpXoa.Value = DateTime.Now;
+        }
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            Update_HVien();
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            reset();
+            btnSua.Enabled = false;
         }
     }
 }
